@@ -1,0 +1,73 @@
+version: "3.8"
+services:
+  redis:
+    image: redis
+    container_name: redis
+    restart: on-failure
+    volumes:
+      - redis:/data:rw
+
+  db:
+    image: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    restart: on-failure
+    container_name: postgresql
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+
+  django:
+    build:
+      context: .
+      args:
+        - DEV=true
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app:/app
+    image: app:django
+    container_name: django
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    restart: unless-stopped
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+    depends_on:
+      - db
+
+  celery:
+    build:
+      context: .
+    command: celery -A app worker -l INFO
+    volumes:
+      - ./app:/app
+    container_name: celery
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+      - django
+
+  # nginx:
+  #   image: nginx:latest
+  #   container_name: nginx
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - ./nginx/nginx-setup.conf:/etc/nginx/conf.d/default.conf:ro
+  #   restart: on-failure
+  #   depends_on:
+  #     - django
+
+volumes:
+  postgres:
+  redis:
