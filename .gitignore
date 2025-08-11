@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg-info/
+*.egg
+.Python
+
+# Virtual environments
+.env
+.venv/
+venv/
+ENV/
+env/
+
+# Django
+db.sqlite3
+*.sqlite3
+media/
+uploads/
+staticfiles/
+local_settings.py
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
+*.pid
+
+# Others
+*.swp
+*.swo
+.idea/
+
+# Test/coverage
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache/
+pytest_cache/
+
+# Node (if you use npm/yarn for frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
