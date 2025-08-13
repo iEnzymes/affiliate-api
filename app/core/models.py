@@ -4,6 +4,7 @@ from django.db import models
 class Room(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
+    quote = models.TextField(blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -23,7 +24,7 @@ class RoomImage(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    image = models.CharField(max_length=255)
+    quote = models.TextField(blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -33,7 +34,6 @@ class Category(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
