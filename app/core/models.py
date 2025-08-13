@@ -14,7 +14,7 @@ class Room(models.Model):
 
 class RoomImage(models.Model):
     room = models.ForeignKey(Room, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True)
+    image = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -59,7 +59,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='uploads/%Y/%m/%d/', null=True, blank=True)
+    image = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
