@@ -44,8 +44,6 @@ class Tag(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
-    short_description = models.TextField(blank=True, null=True)
-    label = models.CharField(max_length=100, blank=True, null=True)
     link = models.CharField(max_length=255)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
