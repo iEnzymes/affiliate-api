@@ -20,6 +20,11 @@ class ProductSerializerList(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ProductListFilteredResponseSerializer(serializers.Serializer):
+    room = RoomSerializer(allow_null=True)
+    products = ProductSerializerList(many=True)
+
+
 class ProductSerializerDetailed(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     room = RoomSerializer(read_only=True)
