@@ -1,10 +1,9 @@
 from rest_framework import generics
 from rest_framework.response import Response
 
-from core.models import Product, Room, Category, Tag
+from core.models import Product, Category, Tag
 from core.utils import get_product_filters
 from .serializers import ProductSerializerList, ProductSerializerDetailed, ProductListFilteredResponseSerializer
-from room.serializers import RoomSerializer
 
 class ProductListView(generics.ListCreateAPIView):
     serializer_class = ProductListFilteredResponseSerializer
@@ -18,22 +17,23 @@ class ProductListView(generics.ListCreateAPIView):
         queryset = self.get_queryset()
         products_data = ProductSerializerList(queryset, many=True, context={'request': request}).data
 
-        room_param = self.request.query_params.get('room')
-        room_data = None
+        # room_param = self.request.query_params.get('room')
+        # room_data = None
 
-        if room_param:
-            try:
-                room_obj = Room.objects.get(name__iexact=room_param)
-                room_data = RoomSerializer(room_obj, context={'request': request}).data
-            except Room.DoesNotExist:
-                room_data = None
+        # if room_param:
+        #     try:
+        #         room_obj = Room.objects.get(name__iexact=room_param)
+        #         room_data = RoomSerializer(room_obj, context={'request': request}).data
+        #     except Room.DoesNotExist:
+        #         room_data = None
 
-        response_data = {
-            "room": room_data,
-            "products": products_data
-        }
+        # response_data = {
+        #     "room": room_data,
+        #     "products": products_data
+        # }
 
-        return Response(response_data)
+        # return Response(response_data)
+        return Response(products_data)
 
 
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
