@@ -26,8 +26,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('product.urls')),
-    path('api/', include('room.urls')),
     path('api/', include('category.urls')),
+    path('api/', include('subcategory.urls')),
     path('api/', include('tag.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='api-schema'),
     path(

@@ -12,6 +12,7 @@ class CategoryListView(generics.ListCreateAPIView):
 
       return Category.objects.filter(**filters)
 
+
 class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CategorySerializer
 

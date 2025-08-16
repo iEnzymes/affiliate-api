@@ -1,10 +1,11 @@
 from django.db import models
 
 
-class Room(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     quote = models.TextField(blank=True, null=True)
+    subcategory = models.ForeignKey('SubCategory', on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -12,16 +13,7 @@ class Room(models.Model):
         return self.name
 
 
-class RoomImage(models.Model):
-    room = models.ForeignKey(Room, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Image for {self.room.name}"
-
-
-class Category(models.Model):
+class SubCategory(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     quote = models.TextField(blank=True, null=True)
@@ -45,8 +37,8 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     link = models.CharField(max_length=255)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
