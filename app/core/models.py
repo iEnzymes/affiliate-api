@@ -5,7 +5,8 @@ class Category(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     quote = models.TextField(blank=True, null=True)
-    subcategory = models.ForeignKey('SubCategory', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
+    sub_categories = models.ManyToManyField('SubCategory', blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -15,8 +16,6 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     name = models.CharField(max_length=255)
-    description = models.TextField()
-    quote = models.TextField(blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
