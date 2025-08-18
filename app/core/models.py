@@ -37,6 +37,7 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     link = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)
     tag = models.ManyToManyField(Tag, blank=True)
