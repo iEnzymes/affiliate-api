@@ -3,6 +3,7 @@ from rest_framework import serializers
 from core.models import Product, ProductImage
 from category.serializers import CategorySerializer
 from tag.serializers import TagSerializer
+from subcategory.serializers import SubCategorySerializer
 
 
 class ProductImageSerializer(serializers.ModelSerializer):
@@ -25,6 +26,7 @@ class ProductListFilteredResponseSerializer(serializers.Serializer):
 
 class ProductSerializerDetailed(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
+    subcategory = SubCategorySerializer(read_only=True)
     tag = TagSerializer(many=True, read_only=True)
 
     class Meta:
