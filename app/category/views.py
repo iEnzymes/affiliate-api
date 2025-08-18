@@ -10,7 +10,7 @@ class CategoryListView(generics.ListCreateAPIView):
     def get_queryset(self):
       filters = get_basic_filters(self.request.query_params)
 
-      return Category.objects.filter(**filters)
+      return Category.objects.filter(**filters).order_by('sort')
 
 
 class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
