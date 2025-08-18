@@ -7,6 +7,7 @@ class Category(models.Model):
     quote = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='images/%Y/%m/%d/', null=True, blank=True)
     sub_categories = models.ManyToManyField('SubCategory', blank=True)
+    sort = models.PositiveIntegerField(default=0)
     date_added = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
