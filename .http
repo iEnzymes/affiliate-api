@@ -1,0 +1,29 @@
+#Variable
+@baseUrl = http://localhost:8000/api
+@Authorization = Token ae0a6d5bd35a4396ca92077c51f9fc712e1ab2c8
+@contentType = application/json
+
+### Base url
+GET {{baseUrl}}
+
+
+
+###
+### PRODUCT API
+###
+### Find all products
+# @name getAllTasks
+GET {{baseUrl}}/product/7
+Authorization: {{Authorization}}
+Content-Type: {{contentType}}
+
+
+### Filter by category ID
+GET {{baseUrl}}/product/?category_id=5
+Authorization: {{Authorization}}
+Content-Type: {{contentType}}
+
+### Filter by subcategory ID
+GET {{baseUrl}}/subcategory/?category_id=5
+Authorization: {{Authorization}}
+Content-Type: {{contentType}}

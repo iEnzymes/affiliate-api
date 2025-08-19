@@ -12,27 +12,11 @@ class ProductListView(generics.ListCreateAPIView):
         filters = get_product_filters(self.request.query_params)
         return Product.objects.filter(**filters)
 
-
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         products_data = ProductSerializerList(queryset, many=True, context={'request': request}).data
 
-        room_param = self.request.query_params.get('room')
-        room_data = None
-
-        if room_param:
-            try:
-                room_obj = Room.objects.get(name__iexact=room_param)
-                room_data = RoomSerializer(room_obj, context={'request': request}).data
-            except Room.DoesNotExist:
-                room_data = None
-
-        response_data = {
-            "room": room_data,
-            "products": products_data
-        }
-
-        return Response(response_data)
+        return Response(products_data)
 
 
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):

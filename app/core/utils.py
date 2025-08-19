@@ -18,6 +18,8 @@ def get_product_filters(params):
     filters = {}
     category = params.get('category')
     category_id = params.get('category_id')
+    subcategory = params.get('subcategory')
+    subcategory_id = params.get('subcategory_id')
     room = params.get('room')
     room_id = params.get('room_id')
 
@@ -25,6 +27,11 @@ def get_product_filters(params):
         filters['category__id'] = category_id
     elif category:
         filters['category__name__iexact'] = category
+
+    if subcategory_id:
+        filters['subcategory__id'] = subcategory_id
+    elif subcategory:
+        filters['subcategory__name__iexact'] = subcategory
 
     if room_id:
         filters['room__id'] = room_id
