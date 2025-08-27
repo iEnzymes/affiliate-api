@@ -19,11 +19,18 @@ Content-Type: {{contentType}}
 
 
 ### Filter by category ID
-GET {{baseUrl}}/product/?category_id=5
+GET {{baseUrl}}/product/?category_id=5&subcategory_id=11
 Authorization: {{Authorization}}
 Content-Type: {{contentType}}
 
+
 ### Filter by subcategory ID
 GET {{baseUrl}}/subcategory/?category_id=5
+Authorization: {{Authorization}}
+Content-Type: {{contentType}}
+
+
+### Filter by subcategory ID
+GET {{baseUrl}}/category/5
 Authorization: {{Authorization}}
 Content-Type: {{contentType}}
